@@ -1,0 +1,21 @@
+while True:
+    sdelka=int(input('введите сдельное количество нормо-часов'))
+    tarif=int(input('введите тариф рабочего'))
+    pfrv=int(input('отработанное количество часов за месяц'))
+    if pfrv < 721:
+        break
+    print('некорректное количество часов')
+production=sdelka/pfrv*100
+sdelkaZP=sdelka*tarif
+print('Сдельная з/п',round(sdelkaZP, 2),'руб.')
+maxpremia=70
+procentPremia=maxpremia*production/100
+ZP=(procentPremia/100+1)*sdelkaZP
+ZPcYK=ZP*1.15
+print('Начисленная з/п',round(ZPcYK, 2),'руб.')
+Ctrvznos=ZPcYK*30.2/100
+print('Уплаченные страховые взносы',round(Ctrvznos, 2),'руб.')
+ndfl=ZPcYK*0.13
+print('Уплаченный НДФЛ',round(ndfl, 2),'руб.')
+naRuki=ZPcYK/1.13
+print('Получит на руки',round(naRuki, 2),'руб.')
