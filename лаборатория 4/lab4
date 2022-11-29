@@ -1,1 +1,16 @@
+class human():
+    def __init__(self, FIO, sdelka, pfrv, tarif):
+        #расчет сдельной заработной платы  премии
+        self.FIO=FIO
+        self.sdelka=sdelka
+        self.pfrv=pfrv
+        self.tarif=tarif
+        self.procentPremia=70*sdelka/pfrv/100
+        self.ZP=(tarif*sdelka*(1+self.procentPremia))*1.15
+        self.naRuki=self.ZP*0.87
+    def result(self):
+    #вывод данных
+        print ("Сотрудник компании "+ self.FIO +" получил на руки " + str(round(self.naRuki,2)))
 
+human1=human("Иванов А.А,",140,167,150)
+human1.result()
