@@ -1,6 +1,41 @@
-class human():
+from tkinter import *
+
+def clicked():  
+    lbl4.configure(txt="привет",)  
+
+window = Tk()
+window.title("Добро пожаловать в приложение по Расчету Заработной платы")
+window.geometry('400x250')
+
+lbl1=Label(window, text="Введирте ФИО")
+lbl1.grid(column=0,row=0)
+FIO=Entry (window, width=10)
+FIO.grid (column=1, row=0)
+
+lbl2=Label(window, text="Введите отработанное время, в н/ч:")
+lbl2.grid(column=0,row=1)
+sdelka=Entry (window, width=10)
+sdelka.grid (column=1, row=1)
+
+lbl3=Label(window, text="Введите плановый фонд рабочего времени:")
+lbl3.grid(column=0,row=2)
+pfrv=Entry (window, width=10)
+pfrv.grid (column=1, row=2)
+
+lbl4=Label(window, text="Введите часовую тарифную ставку:")
+lbl4.grid(column=0,row=3)
+tarif=Entry (window, width=10)
+tarif.grid (column=1, row=3)
+
+btn = Button(window, text="Далее", command=clicked)  
+btn.grid(column=2, row=3)  
+
+
+window.mainloop()
+
+class calculation():
+    #расчет сдельной заработной платы  премии
     def __init__(self, FIO, sdelka, pfrv, tarif):
-        #расчет сдельной заработной платы  премии
         self.FIO=FIO
         self.sdelka=sdelka
         self.pfrv=pfrv
@@ -9,8 +44,22 @@ class human():
         self.ZP=(tarif*sdelka*(1+self.procentPremia))*1.15
         self.naRuki=self.ZP*0.87
     def result(self):
-    #вывод данных
-        print ("Сотрудник компании "+ self.FIO +" получил на руки " + str(round(self.naRuki,2)))
+        return f"Премия = {round(self.procentPremia, 2)}\n" \
+               f"ЗП начисленная = {round(self.ZP,  2)}\n" \
+               f"ЗП полученная = {round(self.naRuki, 2)}\n"
+    def __str__(self):
+        return "Сотрудник компании "+ self.FIO +" получил на руки " + str(round(self.naRuki,2))
 
-human1=human("Иванов А.А,",140,167,150)
-human1.result()
+calc_storage = []
+inp = ''
+while inp != '0':
+    #Ввод данных
+    FIO=input('Введите ФИО.: ')
+    sdelka=int(input('Введите отработанное время, в н/ч: '))
+    pfrv=int(input('Введите плановый фонд рабочего времени: '))
+    tarif=int(input('Введите часовую тарифную ставку: '))
+    calc_storage.append(calculation(FIO, sdelka, pfrv, tarif))
+    inp = input()
+
+for c in calc_storage:
+    print(c)
